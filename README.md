@@ -18,4 +18,20 @@ Workflow:
 - New idea added to database
 
 
-Algorithm
+Usage:
+
+- Run dist/ideabank
+- Works on Windows, Mac OSX and Linux
+
+Screenshots:
+
+Start screen
+![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
+
+Enter an idea
+![](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
+
+Verify against existing duplicates
+![](https://raw.github.com/anubhavashok/ideabank/master/images/duplicate.png)
+
+Total time spent: ~5 hours
