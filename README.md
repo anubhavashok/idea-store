@@ -5,7 +5,7 @@ A ghetto Python based GUI application to store and tag ideas and prevent duplica
 
 Pitch:
 Do you ever have great ideas? Everyone has great ideas. The problem with ideas is that they sometimes tend to disappear into the ether. To complicate things, it comes back to you at a later date disguised as a new idea. 
-You don't have to suffer anymore! Ideabank helps you keep track of ideas, old and new. Never worry about it again!
+You don't have to suffer anymore! Ideabank helps you keep track of ideas, old and new. Never worry about duplicate ideas or jank like that again! Screw the jank, get ideabank.
 
 p.s. Yea the UI isn't great but all good things come in small packages don't they ;)
 
