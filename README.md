@@ -25,8 +25,7 @@ Usage:
 
 Screenshots:
 
-Start screen:
-![](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
+![Start screen](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
 
 Enter an idea:
 ![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
