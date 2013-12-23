@@ -36,5 +36,3 @@ Enter an idea:
 Verify against existing duplicates:
 
 ![](https://raw.github.com/anubhavashok/ideabank/master/images/duplicate.png)
-
-Total time spent: ~5 hours
