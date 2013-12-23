@@ -18,4 +18,7 @@ Workflow:
 - New idea added to database
 
 
-Algorithm
+Usage
+
+- Run dist/executablescript
+- Works on Windows, Mac OSX and Linux
