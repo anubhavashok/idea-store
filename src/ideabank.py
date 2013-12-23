@@ -1,11 +1,21 @@
-from Tkinter import *
-import ttk
 import sqlite3 as lite
-import tkFont
+import sys
 
 con = None
+
 con = lite.connect('ideabank.db')
-cur = con.cursor() 
+cur = con.cursor();
+try:
+	cur.execute("CREATE TABLE tags( id integer primary key,tag text)");
+	cur.execute("CREATE TABLE ideas( id integer primary key, title text, description text)");
+	cur.execute("CREATE TABLE ideatags( iid integer REFERENCES ideas(id), tid integer REFERENCES tags(id) )");
+	
+except:
+	pass
+
+from Tkinter import *
+import ttk
+import tkFont
 
 def submitvals():
 	titleval= str(titleInput.get())
@@ -35,6 +45,26 @@ def submitvals():
 def submitvals_verify(verify_window):
 	submitvals()
 	verify_window.destroy()
+
+def viewideas():
+	ideas_window = Tk()
+	ideas_window.title("All ideas")
+	ideas_window.geometry('450x250+200+200')
+	dataCols = ('id','title','description','tags')
+	
+	mlb = ttk.Treeview(ideas_window,columns=dataCols,show='headings')
+	for c in dataCols:
+		mlb.heading(c, text=c.title())           
+		mlb.column(c, width=100)
+	cur.execute("SELECT * from ideas")
+	ideas_all = cur.fetchall()
+	for i in ideas_all:
+		mlb.insert('','end',values=i)
+	mlb.grid(row=0, column=0)
+	button_frame = Frame(ideas_window)
+	button_frame.grid(row=1,column=0, sticky=E)
+	Ok = Button(button_frame, text ="Ok", command = ideas_window.destroy)
+	Ok.grid(row=0, column=1)
 
 def verifyinput():
 	titleval= str(titleInput.get())
@@ -137,6 +167,7 @@ tagsInput.pack()
 menubar = Menu(app)
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="Open existing ideabank")
+filemenu.add_command(label="View all ideas", command=viewideas)
 filemenu.add_separator()
 filemenu.add_command(label="Exit",command=app.destroy)
 menubar.add_cascade(label="file",menu=filemenu)
