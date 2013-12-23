@@ -72,6 +72,7 @@ def verifyinput():
 			display.append(i)
 	if display:
 		verify_window = Tk()
+		verify_window.title("Verify existing idea")
 		verify_window.geometry('450x250+200+200')
 		dataCols = ('id','title','description','tags')
 	
