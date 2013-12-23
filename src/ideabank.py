@@ -29,7 +29,7 @@ def submitvals():
 		else:
 			tid=tid[0][0]
 		print str(tid)
-		cur.execute("INSERT into ideatags(iid, tid) values (?,?)", (str(iid), str(tid)))
+		cur.execute("INSERT into ideatags(iid, tid) values (?,?)", (str(iid+1), str(tid)))
 		con.commit()
 
 def submitvals_verify(verify_window):
@@ -42,8 +42,6 @@ def verifyinput():
 	tagsval= str(tagsInput.get())
 	cur.execute("SELECT Count(*) from ideas")
 	idea_count = cur.fetchall()[0][0]
-	if idea_count < 10:
-		submitvals()
 	#get ids of tags
 	tags = tagsval.split(", ")
 	tagids=[]
@@ -56,7 +54,7 @@ def verifyinput():
 	cur.execute("SELECT Count(*) from ideas")
 	ideas_count = cur.fetchall()[0][0]
 	print ideas_count
-	ideatagcount = [0 for i in range(ideas_count)]
+	ideatagcount = [0 for i in range(ideas_count+1)]
 	ideatags = []
 	
 	cur.execute("SELECT * from ideatags")
@@ -72,30 +70,31 @@ def verifyinput():
 	for i in range(len(ideatagcount)):
 		if ideatagcount[i]>2:
 			display.append(i)
-		
-	print display
-	verify_window = Tk()
-	verify_window.geometry('450x250+200+200')
-	dataCols = ('id','title','description','tags')
+	if display:
+		verify_window = Tk()
+		verify_window.geometry('450x250+200+200')
+		dataCols = ('id','title','description','tags')
 	
-	mlb = ttk.Treeview(verify_window,columns=dataCols,show='headings')
-	for c in dataCols:
-		mlb.heading(c, text=c.title())           
-		mlb.column(c, width=100)
+		mlb = ttk.Treeview(verify_window,columns=dataCols,show='headings')
+		for c in dataCols:
+			mlb.heading(c, text=c.title())           
+			mlb.column(c, width=100)
 	
-	for i in display:
-		cur.execute("SELECT * from ideas where id==?",(i,))
-		final_ideas = cur.fetchall()[0]
-		print final_ideas
-		mlb.insert('','end',values=final_ideas)
-	mlb.grid(row=0, column=0)
-	button_frame = Frame(verify_window)
-	button_frame.grid(row=1,column=0, sticky=E)
-	Cfm = Button(button_frame, text ="Confirm", command = lambda: submitvals_verify(verify_window))
-	Cfm.grid(row=0, column=1)
-	Cnl = Button(button_frame, text ="Cancel", command = verify_window.destroy)
-	Cnl.grid(row=0, column=2)
-	
+		for i in display:
+			cur.execute("SELECT * from ideas where id==?",(i,))
+			print "final_ideas is:"
+			final_ideas = cur.fetchall()[0]
+			print final_ideas
+			mlb.insert('','end',values=final_ideas)
+		mlb.grid(row=0, column=0)
+		button_frame = Frame(verify_window)
+		button_frame.grid(row=1,column=0, sticky=E)
+		Cfm = Button(button_frame, text ="Confirm", command = lambda: submitvals_verify(verify_window))
+		Cfm.grid(row=0, column=1)
+		Cnl = Button(button_frame, text ="Cancel", command = verify_window.destroy)
+		Cnl.grid(row=0, column=2)
+	else:
+		submitvals()
 
 app = Tk()
 app.title("GUI Example")
