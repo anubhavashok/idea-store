@@ -26,12 +26,12 @@ Usage:
 Screenshots:
 
 Start screen
-![](https://github.com/anubhavashok/ideabank/blob/master/images/start.png)
+![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
 
 Enter an idea
-![](https://github.com/anubhavashok/ideabank/blob/master/images/idea.png)
+![](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
 
 Verify against existing duplicates
-![](https://github.com/anubhavashok/ideabank/blob/master/images/duplicate.png)
+![](https://raw.github.com/anubhavashok/ideabank/master/images/duplicate.png)
 
 Total time spent: ~5 hours
