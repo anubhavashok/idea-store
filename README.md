@@ -3,6 +3,12 @@ ideabank
 
 A ghetto Python based GUI application to store and tag ideas and prevent duplicate entries
 
+Pitch:
+Do you ever have great ideas? Everyone has great ideas. The problem with ideas is that they sometimes tend to disappear into the ether. To complicate things, it comes back to you at a later date disguised as a new idea. 
+You don't have to suffer anymore! Ideabank helps you keep track of ideas, old and new. Never worry about duplicate ideas or jank like that again! Screw the jank, get ideabank.
+
+p.s. Yea the UI isn't great but all good things come in small packages don't they ;)
+
 Motivation:
 
 1. I need a place to store all my ideas.
@@ -25,13 +31,14 @@ Usage:
 
 Screenshots:
 
-Start screen
-![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
+Start screen:
 
-Enter an idea
 ![](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
 
-Verify against existing duplicates
-![](https://raw.github.com/anubhavashok/ideabank/master/images/duplicate.png)
+Enter an idea:
 
-Total time spent: ~5 hours
+![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
+
+Verify against existing duplicates:
+
+![](https://raw.github.com/anubhavashok/ideabank/master/images/duplicate.png)
