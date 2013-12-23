@@ -7,8 +7,11 @@ con = lite.connect('ideabank.db')
 cur = con.cursor() 
 
 def submitvals():
+	titleval= str(titleInput.get())
+	descriptionval= str(descriptionInput.get(0.0,END))
+	tagsval= str(tagsInput.get())
 	cur.execute("SELECT Count(*) from ideas")
-	iid = cur.fetchall()[0][0]+1;
+	iid = cur.fetchall()[0][0];
 	cur.execute("INSERT into ideas(title,description) values (?,?)", (titleval, descriptionval))
 	con.commit()
 	
@@ -17,12 +20,14 @@ def submitvals():
 		cur.execute("SELECT id from tags where tag==?",(tag,))
 		tid = None
 		tid = cur.fetchall()
-		if tid==None:
+		if not tid:
 			cur.execute("INSERT into tags(tag) values (?)",(tag,))
 			con.commit()
 			cur.execute("SELECT Count(*) from tags")
-			tid = cur.fetchall()[0][0] +1
-		
+			tid = cur.fetchall()[0][0]
+		else:
+			tid=tid[0][0]
+		print str(tid)
 		cur.execute("INSERT into ideatags(iid, tid) values (?,?)", (str(iid), str(tid)))
 		con.commit()
 
@@ -32,7 +37,7 @@ def verifyinput():
 	tagsval= str(tagsInput.get())
 	cur.execute("SELECT Count(*) from ideas")
 	idea_count = cur.fetchall()[0][0]
-	if idea_count < 1:
+	if idea_count < 10:
 		submitvals()
 	#get ids of tags
 	tags = tagsval.split(", ")
@@ -45,19 +50,17 @@ def verifyinput():
 		
 	cur.execute("SELECT Count(*) from ideas")
 	ideas_count = cur.fetchall()[0][0]
-	ideatagcount = []
+	print ideas_count
+	ideatagcount = [0 for i in range(ideas_count)]
 	ideatags = []
 	
 	cur.execute("SELECT * from ideatags")
 	ideatags=cur.fetchall()
-	
-	for entry in ideatags:
-		if entry[1] in tagids:
-			print entry[1]
-			print entry[0]
-			ideatagcount[int(entry[0])]+=1
-		
-	
+	if ideatags:
+		for entry in ideatags:
+			if entry[1] in tagids:
+				ideatagcount[int(entry[0])]+=1
+	print ideatagcount
 	display = []
 	#change to top ten results
 	#current implementation is threshold > 2
@@ -65,14 +68,16 @@ def verifyinput():
 		if ideatagcount[i]>2:
 			display.append(i)
 		
-	
+	print display
 	verify_window = Tk()
 	verify_window.geometry('450x500+200+200')
 	mlb = ttk.Treeview(verify_window,columns=('id','title','description','tags'),show='headings')
 	
 	for i in display:
 		cur.execute("SELECT * from ideas where id==?",(i,))
-		mlb.insert('','end',cur.fetchall())
+		final_ideas = cur.fetchall()[0]
+		print final_ideas
+		mlb.insert('','end',values=final_ideas)
 	mlb.pack()
 	
 
