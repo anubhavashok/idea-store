@@ -1,7 +1,7 @@
 ideabank
 ========
 
-Python based GUI application to store and tag ideas and prevent duplicate entries
+A ghetto Python based GUI application to store and tag ideas and prevent duplicate entries
 
 Motivation:
 
