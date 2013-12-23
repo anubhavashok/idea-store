@@ -18,7 +18,20 @@ Workflow:
 - New idea added to database
 
 
-Usage
+Usage:
 
 - Run dist/executablescript
 - Works on Windows, Mac OSX and Linux
+
+Screenshots:
+
+Start screen
+![](https://github.com/anubhavashok/ideabank/blob/master/images/start.png)
+
+Enter an idea
+![](https://github.com/anubhavashok/ideabank/blob/master/images/idea.png)
+
+Verify against existing duplicates
+![](https://github.com/anubhavashok/ideabank/blob/master/images/duplicate.png)
+
+Total time spent: ~5 hours
