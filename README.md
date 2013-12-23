@@ -20,7 +20,7 @@ Workflow:
 
 Usage:
 
-- Run dist/executablescript
+- Run dist/ideabank
 - Works on Windows, Mac OSX and Linux
 
 Screenshots:
