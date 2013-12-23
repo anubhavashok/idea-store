@@ -98,7 +98,7 @@ def verifyinput():
 		submitvals()
 
 app = Tk()
-app.title("GUI Example")
+app.title("IdeaBank")
 app.geometry('450x500+200+200')
 
 promptText = StringVar()
