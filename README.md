@@ -27,7 +27,8 @@ Workflow:
 Usage:
 
 - Run dist/ideabank
-- Works on Windows, Mac OSX and Linux
+- Executable only runs on linux, python script can be run on other OSes.
+- $python ideabank.py
 
 Screenshots:
 
