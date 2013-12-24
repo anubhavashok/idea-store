@@ -1,5 +1,7 @@
 import sqlite3 as lite
 import sys
+import nltk
+from nltk.corpus import stopwords
 
 con = None
 
@@ -17,16 +19,25 @@ from Tkinter import *
 import ttk
 import tkFont
 
+allTags = []
+
 def submitvals():
 	titleval= str(titleInput.get())
 	descriptionval= str(descriptionInput.get(0.0,END))
-	tagsval= str(tagsInput.get())
+	#tagsval= str(tagsInput.get())
 	cur.execute("SELECT Count(*) from ideas")
 	iid = cur.fetchall()[0][0];
 	cur.execute("INSERT into ideas(title,description) values (?,?)", (titleval, descriptionval))
 	con.commit()
 	
-	tags = tagsval.split(", ")
+	#tags = tagsval.split(", ")
+	tags=[]
+	for button in allTags:
+		try:
+			tags.append(button.config('text')[-1])
+		except:
+			pass
+	print tags
 	for tag in tags:
 		cur.execute("SELECT id from tags where tag==?",(tag,))
 		tid = None
@@ -127,6 +138,28 @@ def verifyinput():
 	else:
 		submitvals()
 
+def generateKeywords(event):
+	textval = str(descriptionInput.get(0.0,END))
+	textval = textval[:-1]
+	global allTags
+	allTags = []
+	# remove stopwords
+	stop = stopwords.words('english')
+	textval = [i for i in textval.split(' ') if i not in stop];
+	print textval
+	i=0
+	# for each remaining word
+	for word in textval:
+		i+=1
+		# create a button containing the word
+		f=Frame(tagsFrame)
+		f.pack(side='top')
+		b = Button(f,text=word,command = f.destroy)
+		allTags.append(b)
+		f.grid(row=0,column=i)
+		b.grid(row=0,column=0)
+
+
 app = Tk()
 app.title("IdeaBank")
 app.geometry('450x500+200+200')
@@ -147,12 +180,13 @@ titleInput.pack()
 
 
 descriptionText = StringVar()
-descriptionText.set("Description: ")
+descriptionText.set("Description (press Return when done): ")
 description = Label(app, textvariable=descriptionText, height=4)
 description.pack()
 
 descriptionVal = StringVar(None)
 descriptionInput = Text(app, height=8)
+descriptionInput.bind("<Return>", generateKeywords)
 descriptionInput.pack()
 
 tagsText = StringVar()
@@ -160,9 +194,9 @@ tagsText.set("Tags: ")
 tags = Label(app, textvariable=tagsText, height=4)
 tags.pack()
 
-tagsVal = StringVar(None)
-tagsInput = Entry(app, textvariable = tagsVal)
-tagsInput.pack()
+#tagsVal = StringVar(None)
+#tagsInput = Entry(app, textvariable = tagsVal)
+#tagsInput.pack()
 
 menubar = Menu(app)
 filemenu = Menu(menubar, tearoff=0)
@@ -174,6 +208,10 @@ menubar.add_cascade(label="file",menu=filemenu)
 app.config(menu=menubar)
 #show existing tags
 #or show related tags
+
+tagsFrame = Frame(app)
+tagsFrame.pack()
+
 
 submit = Button(app, text="Submit", width=20, command= verifyinput)
 submit.pack(side='bottom',padx=15, pady=15)
