@@ -26,7 +26,8 @@ Workflow:
 
 Usage:
 
-- Run dist/ideabank
+- Download executable from https://sourceforge.net/projects/ideabankbase/files/
+- Run executable
 - Executable only runs on linux, python script can be run on other OSes.
 - $python ideabank.py
 
@@ -34,11 +35,11 @@ Screenshots:
 
 Start screen:
 
-![](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
+![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
 
 Enter an idea:
 
-![](https://raw.github.com/anubhavashok/ideabank/master/images/start.png)
+![](https://raw.github.com/anubhavashok/ideabank/master/images/idea.png)
 
 Verify against existing duplicates:
 
