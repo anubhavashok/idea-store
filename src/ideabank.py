@@ -80,11 +80,17 @@ def viewideas():
 def verifyinput():
 	titleval= str(titleInput.get())
 	descriptionval= str(descriptionInput.get(0.0,END))
-	tagsval= str(tagsInput.get())
+	#tagsval= str(tagsInput.get())
 	cur.execute("SELECT Count(*) from ideas")
 	idea_count = cur.fetchall()[0][0]
 	#get ids of tags
-	tags = tagsval.split(", ")
+	#tags = tagsval.split(", ")
+	tags=[]
+	for button in allTags:
+		try:
+			tags.append(button.config('text')[-1])
+		except:
+			pass
 	tagids=[]
 	for tag in tags:
 		cur.execute("SELECT id from tags where tag==?",(tag,))
